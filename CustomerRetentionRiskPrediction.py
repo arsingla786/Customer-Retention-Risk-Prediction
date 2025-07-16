@@ -21,7 +21,6 @@ By predicting customer churn, the company can proactively design retention strat
 keep these customers, thereby improving customer satisfaction and reducing financial loss.
 '''
 import pandas as pd
-print(1)
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -31,11 +30,18 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.metrics import mean_squared_error, r2_score
+from imblearn.over_sampling import SMOTE
 
 #load the dataset using pandas 
 df = pd.read_csv("C:\\Users\\Arnav Singla\\Downloads\\Customer_data.csv")
-#drop null values
-df = df.dropna()
+
+# Convert TotalCharges to numeric and fill missing with 0
+df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
+df['TotalCharges'] = df['TotalCharges'].fillna(0)
+
+# Drop customerID
+df.drop(columns=['customerID'], inplace=True)
+
 #print some rows of data
 print(df.head())
 
@@ -73,7 +79,7 @@ plt.show()'''
 #Encode the data which is non numeric like gender , Payment methods, subscription status4
 
 label_encoders = {}
-for column in ['customerID','gender','Partner','Dependents','PhoneService','MultipleLines',
+for column in ['gender','Partner','Dependents','PhoneService','MultipleLines',
                'InternetService','OnlineSecurity','OnlineBackup','DeviceProtection',
                'TechSupport','StreamingTV','StreamingMovies','Contract','PaperlessBilling',
                'PaymentMethod','Churn']:
@@ -92,9 +98,13 @@ X = df.drop('Churn',axis=1)
 #target
 y= df['Churn']
 
+# Handle class imbalance using SMOTE (if in data one category is way more than other)
+smote = SMOTE(random_state=42)
+X_resampled, y_resampled = smote.fit_resample(X, y)
+
 #Split into test and training data
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.8, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, test_size=0.2, random_state=0)
 
 # Scaling - to  maintain the range like [0-1] or [0-1000] of each data features
 scaler = StandardScaler()
@@ -113,6 +123,7 @@ print(f'Accuracy: {logreg_accuracy * 100:.2f}%')
 print("\nClassification Report:")
 print(classification_report(y_test, logreg_pred))
 
+print('end1')
 #______________RANDOM FOREST MODEL___________________
 from sklearn.ensemble import RandomForestClassifier
 
@@ -127,3 +138,16 @@ print(f'Accuracy: {rf_accuracy * 100:.2f}%')
 print("\nClassification report :")
 print(classification_report(y_test,rf_pred))
 
+print("Random Forest model is better")
+
+#plotting the accuracies of both models
+accuracies = [logreg_accuracy * 100, rf_accuracy * 100]
+model_names = ['Logistic Regression', 'Random Forest']
+
+# Plot
+plt.figure(figsize=(6, 4))
+bars = plt.bar(model_names, accuracies, color=['skyblue', 'orange'])
+plt.title('Model Accuracy Comparison')
+plt.ylabel('Accuracy (%)')
+plt.ylim(0, 100)
+plt.show()
