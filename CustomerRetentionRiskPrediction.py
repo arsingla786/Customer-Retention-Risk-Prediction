@@ -151,3 +151,114 @@ plt.title('Model Accuracy Comparison')
 plt.ylabel('Accuracy (%)')
 plt.ylim(0, 100)
 plt.show()
+
+#Taking a sample input from user 
+
+input_fields = [
+    'gender','SeniorCitizen','Partner','Dependents','tenure','PhoneService',
+    'MultipleLines','InternetService','OnlineSecurity','OnlineBackup',
+    'DeviceProtection','TechSupport','StreamingTV','StreamingMovies',
+    'Contract','PaperlessBilling','PaymentMethod','MonthlyCharges','TotalCharges'
+]
+
+
+user_values = []
+print("Enter the following values as prompted (0/1 for binary, or numeric values):")
+for col in input_fields:
+    val = input(f"{col}: ")
+    try:
+        val = float(val)
+        if val.is_integer():
+            val = int(val)
+    except ValueError:
+        pass
+    user_values.append(val)
+
+# Convert to DataFrame
+input_df = pd.DataFrame([user_values], columns=input_fields)
+
+# Encode categorical fields using saved LabelEncoders
+categorical_cols = ['gender','Partner','Dependents','PhoneService','MultipleLines',
+                    'InternetService','OnlineSecurity','OnlineBackup','DeviceProtection',
+                    'TechSupport','StreamingTV','StreamingMovies','Contract',
+                    'PaperlessBilling','PaymentMethod']
+
+for col in categorical_cols:
+    le = label_encoders[col]
+    input_df[col] = le.transform([input_df[col][0]])
+
+# Reorder columns as per training features
+final_columns = X.columns  # X is training feature set
+input_df = input_df[final_columns]
+
+# Scale
+input_scaled = scaler.transform(input_df)
+
+# Convert to NumPy array
+input_array = np.array(input_scaled)
+
+# Predict
+prediction = rf_model.predict(input_array)[0]
+
+# Result
+print("\nChurn Prediction:")
+print("Customer is more likely to cease the relationship with company" if prediction == 1 else "Customer seems to be loyal")
+
+if prediction==1:
+    print('''Here are some precautions to take: 
+ 1. Identify Churn Drivers
+Analyze the customer's usage patterns, complaints, or drop in engagement.
+
+Check for:
+
+Frequent service issues
+
+High monthly charges
+
+Low tenure or recent plan downgrade
+
+2. Engage with the Customer
+Assign a customer success representative to personally reach out.
+
+Use surveys or calls to understand dissatisfaction.
+
+Acknowledge their concerns — prevention starts with communication.
+
+ 3. Offer Personalized Incentives
+Discounts, cashback, or loyalty points
+
+Free upgrades (e.g., faster internet, premium features)
+
+Limited-time offers tailored to their usage
+
+ 4. Improve Their Experience
+Suggest better or more relevant plans based on their needs
+
+Offer faster support or assign a dedicated service manager
+
+Remove or simplify hidden charges or billing confusion
+
+5. Monitor Churn Signals Continuously
+Automate churn alerts for high-risk customers (via your model)
+
+Track:
+
+Service usage decline
+
+Increasing complaints
+
+Payment delays
+
+ 6. Build Customer Trust
+Send regular updates about new features or policies
+
+Be transparent in pricing, downtime, and service updates
+
+Ensure customer data privacy and respectful communication'''
+
+    )
+
+else:
+    print('Keep tracking the customer behaviour!')
+
+    
