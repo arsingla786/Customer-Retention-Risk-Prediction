@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Prediction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .form-section {
+            padding: 40px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4facfe;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .result-section {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .result-positive {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .result-negative {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .result-section h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .recommendations {
+            margin-top: 15px;
+        }
+
+        .recommendations h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .recommendations ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .recommendations li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .recommendations li:last-child {
+            border-bottom: none;
+        }
+
+        .recommendations li::before {
+            content: "→ ";
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .numeric-input {
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4facfe;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Customer Churn Prediction</h1>
+            <p>Predict customer retention using machine learning</p>
+        </div>
+
+        <div class="form-section">
+            <form method="POST">
+                <div class="section-title">Customer Demographics</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="gender">Gender:</label>
+                        <select name="gender" id="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="Female" {% if values and values.gender == 'Female' %}selected{% endif %}>Female</option>
+                            <option value="Male" {% if values and values.gender == 'Male' %}selected{% endif %}>Male</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="SeniorCitizen">Senior Citizen (0=No, 1=Yes):</label>
+                        <select name="SeniorCitizen" id="SeniorCitizen" required>
+                            <option value="">Select</option>
+                            <option value="0" {% if values and values.SeniorCitizen == '0' %}selected{% endif %}>No</option>
+                            <option value="1" {% if values and values.SeniorCitizen == '1' %}selected{% endif %}>Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Partner">Partner:</label>
+                        <select name="Partner" id="Partner" required>
+                            <option value="">Select</option>
+                            <option value="No" {% if values and values.Partner == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.Partner == 'Yes' %}selected{% endif %}>Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Dependents">Dependents:</label>
+                        <select name="Dependents" id="Dependents" required>
+                            <option value="">Select</option>
+                            <option value="No" {% if values and values.Dependents == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.Dependents == 'Yes' %}selected{% endif %}>Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tenure">Tenure (months):</label>
+                        <input type="number" name="tenure" id="tenure" class="numeric-input" required min="0" max="100" value="{{ values.tenure if values }}">
+                    </div>
+                </div>
+
+                <div class="section-title">Service Information</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="PhoneService">Phone Service:</label>
+                        <select name="PhoneService" id="PhoneService" required>
+                            <option value="">Select</option>
+                            <option value="No" {% if values and values.PhoneService == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.PhoneService == 'Yes' %}selected{% endif %}>Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="MultipleLines">Multiple Lines:</label>
+                        <select name="MultipleLines" id="MultipleLines" required>
+                            <option value="">Select</option>
+                            <option value="No" {% if values and values.MultipleLines == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.MultipleLines == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No phone service" {% if values and values.MultipleLines == 'No phone service' %}selected{% endif %}>No phone service</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InternetService">Internet Service:</label>
+                        <select name="InternetService" id="InternetService" required>
+                            <option value="">Select</option>
+                            <option value="DSL" {% if values and values.InternetService == 'DSL' %}selected{% endif %}>DSL</option>
+                            <option value="Fiber optic" {% if values and values.InternetService == 'Fiber optic' %}selected{% endif %}>Fiber optic</option>
+                            <option value="No" {% if values and values.InternetService == 'No' %}selected{% endif %}>No</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="OnlineSecurity">Online Security:</label>
+                        <select name="OnlineSecurity" id="OnlineSecurity" required>
+                            <option value="">Select</option>
+                            <option value="No" {% if values and values.OnlineSecurity == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.OnlineSecurity == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No internet service" {% if values and values.OnlineSecurity == 'No internet service' %}selected{% endif %}>No internet service</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="OnlineBackup">Online Backup:</label>
+                        <select name="OnlineBackup" id="OnlineBackup" required>
+                            <option value="">Select</option>
+                            <option value="No" {% if values and values.OnlineBackup == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.OnlineBackup == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No internet service" {% if values and values.OnlineBackup == 'No internet service' %}selected{% endif %}>No internet service</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="DeviceProtection">Device Protection:</label>
+                        <select name="DeviceProtection" id="DeviceProtection" required>
+                            <option value="">Select</option>
+                            <option value="No" {% if values and values.DeviceProtection == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.DeviceProtection == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No internet service" {% if values and values.DeviceProtection == 'No internet service' %}selected{% endif %}>No internet service</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="TechSupport">Tech Support:</label>
+                        <select name="TechSupport" id="TechSupport" required>
+                            <option value="">Select</option>
+                            <option value="No" {% if values and values.TechSupport == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.TechSupport == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No internet service" {% if values and values.TechSupport == 'No internet service' %}selected{% endif %}>No internet service</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="StreamingTV">Streaming TV:</label>
+                        <select name="StreamingTV" id="StreamingTV" required>
+                            <option value="">Select</option>
+                            <option value="No" {% if values and values.StreamingTV == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.StreamingTV == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No internet service" {% if values and values.StreamingTV == 'No internet service' %}selected{% endif %}>No internet service</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="StreamingMovies">Streaming Movies:</label>
+                        <select name="StreamingMovies" id="StreamingMovies" required>
+                            <option value="">Select</option>
+                            <option value="No" {% if values and values.StreamingMovies == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.StreamingMovies == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No internet service" {% if values and values.StreamingMovies == 'No internet service' %}selected{% endif %}>No internet service</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="section-title">Billing Information</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="Contract">Contract:</label>
+                        <select name="Contract" id="Contract" required>
+                            <option value="">Select</option>
+                            <option value="Month-to-month" {% if values and values.Contract == 'Month-to-month' %}selected{% endif %}>Month-to-month</option>
+                            <option value="One year" {% if values and values.Contract == 'One year' %}selected{% endif %}>One year</option>
+                            <option value="Two year" {% if values and values.Contract == 'Two year' %}selected{% endif %}>Two year</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="PaperlessBilling">Paperless Billing:</label>
+                        <select name="PaperlessBilling" id="PaperlessBilling" required>
+                            <option value="">Select</option>
+                            <option value="No" {% if values and values.PaperlessBilling == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.PaperlessBilling == 'Yes' %}selected{% endif %}>Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="PaymentMethod">Payment Method:</label>
+                        <select name="PaymentMethod" id="PaymentMethod" required>
+                            <option value="">Select</option>
+                            <option value="Electronic check" {% if values and values.PaymentMethod == 'Electronic check' %}selected{% endif %}>Electronic check</option>
+                            <option value="Mailed check" {% if values and values.PaymentMethod == 'Mailed check' %}selected{% endif %}>Mailed check</option>
+                            <option value="Bank transfer (automatic)" {% if values and values.PaymentMethod == 'Bank transfer (automatic)' %}selected{% endif %}>Bank transfer (automatic)</option>
+                            <option value="Credit card (automatic)" {% if values and values.PaymentMethod == 'Credit card (automatic)' %}selected{% endif %}>Credit card (automatic)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="MonthlyCharges">Monthly Charges ($):</label>
+                        <input type="number" name="MonthlyCharges" id="MonthlyCharges" class="numeric-input" required min="0" max="200" step="0.01" value="{{ values.MonthlyCharges if values }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="TotalCharges">Total Charges ($):</label>
+                        <input type="number" name="TotalCharges" id="TotalCharges" class="numeric-input" required min="0" max="10000" step="0.01" value="{{ values.TotalCharges if values }}">
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">🔮 Predict Churn</button>
+            </form>
+
+            {% if error %}
+                <div class="error">
+                    <strong>Error:</strong> {{ error }}
+                </div>
+            {% endif %}
+
+            {% if result %}
+                <div class="result-section {% if prediction == 1 %}result-negative{% else %}result-positive{% endif %}">
+                    <h3>Prediction Result</h3>
+                    <p><strong>{{ result }}</strong></p>
+                    
+                    {% if recommendations %}
+                        <div class="recommendations">
+                            <h4>Recommendations:</h4>
+                            <ul>
+                                {% for rec in recommendations %}
+                                    <li>{{ rec }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+
