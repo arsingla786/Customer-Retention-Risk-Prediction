@@ -90,7 +90,7 @@ def predict():
     
     # GET request - show empty form
     return render_template('index.html', result=None)
-print('no problem in lfask')
+
 if __name__ == '__main__':
     app.run(debug=True)
 
