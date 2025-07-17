@@ -176,7 +176,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎯 Customer Churn Prediction</h1>
+            <h1>🎯 Customer Loyalty Prediction</h1>
             <p>Predict customer retention using machine learning</p>
         </div>
 
@@ -263,7 +263,7 @@
                             <option value="">Select</option>
                             <option value="No" {% if values and values.OnlineSecurity == 'No' %}selected{% endif %}>No</option>
                             <option value="Yes" {% if values and values.OnlineSecurity == 'Yes' %}selected{% endif %}>Yes</option>
-                            <option value="No internet service" {% if values and values.OnlineSecurity == 'No internet service' %}selected{% endif %}>No internet service</option>
+                           
                         </select>
                     </div>
 
@@ -273,7 +273,7 @@
                             <option value="">Select</option>
                             <option value="No" {% if values and values.OnlineBackup == 'No' %}selected{% endif %}>No</option>
                             <option value="Yes" {% if values and values.OnlineBackup == 'Yes' %}selected{% endif %}>Yes</option>
-                            <option value="No internet service" {% if values and values.OnlineBackup == 'No internet service' %}selected{% endif %}>No internet service</option>
+                            
                         </select>
                     </div>
 
@@ -283,7 +283,6 @@
                             <option value="">Select</option>
                             <option value="No" {% if values and values.DeviceProtection == 'No' %}selected{% endif %}>No</option>
                             <option value="Yes" {% if values and values.DeviceProtection == 'Yes' %}selected{% endif %}>Yes</option>
-                            <option value="No internet service" {% if values and values.DeviceProtection == 'No internet service' %}selected{% endif %}>No internet service</option>
                         </select>
                     </div>
 
@@ -293,7 +292,7 @@
                             <option value="">Select</option>
                             <option value="No" {% if values and values.TechSupport == 'No' %}selected{% endif %}>No</option>
                             <option value="Yes" {% if values and values.TechSupport == 'Yes' %}selected{% endif %}>Yes</option>
-                            <option value="No internet service" {% if values and values.TechSupport == 'No internet service' %}selected{% endif %}>No internet service</option>
+                          
                         </select>
                     </div>
 
@@ -303,7 +302,7 @@
                             <option value="">Select</option>
                             <option value="No" {% if values and values.StreamingTV == 'No' %}selected{% endif %}>No</option>
                             <option value="Yes" {% if values and values.StreamingTV == 'Yes' %}selected{% endif %}>Yes</option>
-                            <option value="No internet service" {% if values and values.StreamingTV == 'No internet service' %}selected{% endif %}>No internet service</option>
+                           
                         </select>
                     </div>
 
@@ -313,7 +312,7 @@
                             <option value="">Select</option>
                             <option value="No" {% if values and values.StreamingMovies == 'No' %}selected{% endif %}>No</option>
                             <option value="Yes" {% if values and values.StreamingMovies == 'Yes' %}selected{% endif %}>Yes</option>
-                            <option value="No internet service" {% if values and values.StreamingMovies == 'No internet service' %}selected{% endif %}>No internet service</option>
+                            
                         </select>
                     </div>
                 </div>
@@ -361,7 +360,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="submit-btn">🔮 Predict Churn</button>
+                <button type="submit" class="submit-btn">Predict Customer Behaviour</button>
             </form>
 
             {% if error %}
