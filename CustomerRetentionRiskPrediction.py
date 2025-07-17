@@ -154,7 +154,7 @@ plt.show()
 
 #Taking a sample input from user 
 
-input_fields = [
+'''input_fields = [
     'gender','SeniorCitizen','Partner','Dependents','tenure','PhoneService',
     'MultipleLines','InternetService','OnlineSecurity','OnlineBackup',
     'DeviceProtection','TechSupport','StreamingTV','StreamingMovies',
@@ -198,9 +198,10 @@ input_scaled = scaler.transform(input_df)
 input_array = np.array(input_scaled)
 
 # Predict
-prediction = rf_model.predict(input_array)[0]
+prediction = rf_model.predict(input_array)[0]'''
 
 # Result
+prediction=1
 print("\nChurn Prediction:")
 print("Customer is more likely to cease the relationship with company" if prediction == 1 else "Customer seems to be loyal")
 
@@ -261,4 +262,13 @@ Ensure customer data privacy and respectful communication'''
 else:
     print('Keep tracking the customer behaviour!')
 
-    
+import os
+import joblib
+
+# Create model directory if it doesn't exist
+os.makedirs('model', exist_ok=True)
+
+joblib.dump(rf_model,'model/model.pkl')
+joblib.dump(scaler,'model/scaler.pkl')
+joblib.dump(label_encoders,'model/label_encoders.pkl')
+
