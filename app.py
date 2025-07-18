@@ -63,18 +63,18 @@ def predict():
             if prediction == 1:
                 result = "⚠️ Customer is more likely to cease the relationship with company"
                 recommendations = [
-                    "Identify churn drivers through usage patterns and complaints",
-                    "Engage with personalized customer success representative",
-                    "Offer targeted incentives like discounts or upgrades",
+                    "Find out why customers are leaving by looking at their usage and complaints",
+                    "Have a support person personally talk to the customer",
+                    "Offer special discounts on plans or upgrades",
                     "Improve customer experience with better plans",
-                    "Monitor churn signals continuously"
+                    "Keep checking for signs that a customer might leave"
                 ]
             else:
                 result = "✅ Customer seems to be loyal"
                 recommendations = [
                     "Continue tracking customer behavior",
                     "Maintain high service quality",
-                    "Consider loyalty rewards program",
+                    "Consider giving loyalty rewards points",
                     "Regular check-ins to ensure satisfaction"
                 ]
             
