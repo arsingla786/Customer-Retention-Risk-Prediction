@@ -40,5 +40,3 @@ requirements.txt               # Python dependencies
 - Predict customer loyalty instantly
 - Simple and clean UI built with Flask and HTML
 - Get suggestions based on the prediction
-
-### YouTube Video URL- https://youtu.be/6SHENmKWlIY
