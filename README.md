@@ -10,6 +10,7 @@ Deployed on **Railway**: [Visit Application](https://customer-loyalty-predictor.
 ---
 ## 📂 Project Structure
 
+```
 
 model/
 ├── model.pkl                  # Trained ML model (Random Forest)
@@ -22,7 +23,7 @@ Customer_data.csv              # Dataset used for training
 Customer_Loyalty_Prediction.py # Training + model saving script
 Procfile                       # Deployment process file (for Railway/Heroku)
 requirements.txt               # Python dependencies
-
+```
 ---
 
 ## 🧠 Model
