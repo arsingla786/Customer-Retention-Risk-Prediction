@@ -44,4 +44,4 @@ requirements.txt               # Python dependencies
 
 
 ## Data Visualisation
-<img width="980" height="663" alt="Image" src="https://github.com/user-attachments/assets/4f3b83d8-2f17-4896-8fb0-84402dbe5ed1" />
+<img width="400" height="400" alt="Image" src="https://github.com/user-attachments/assets/4f3b83d8-2f17-4896-8fb0-84402dbe5ed1" />
