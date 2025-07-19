@@ -8,21 +8,19 @@ Deployed on **Railway**: [Visit Application](https://customer-loyalty-predictor.
 
 
 ---
-
 ## 📂 Project Structure
-├── model/
-│ ├── model.pkl # Trained ML model (Random Forest)
-│ ├── scaler.pkl # Feature scaler (StandardScaler)
-│ └── label_encoders.pkl # Label encoders for categorical features
-├── templates/
-│ └── index.html # Frontend template for input form
-├── app.py # Flask web app
-├── Customer_data.csv # Dataset used for training
-├── Customer_Loyalty_Prediction.py # Training + model saving script
-├── Procfile # Deployment process file (for Railway/Heroku)
-├── requirements.txt # Python dependencies
 
-
+model/
+├── model.pkl # Trained ML model (Random Forest)
+├── scaler.pkl # Feature scaler (StandardScaler)
+├── label_encoders.pkl # Label encoders for categorical features
+templates/
+├── index.html # Frontend template for input form
+app.py # Flask web app
+Customer_data.csv # Dataset used for training
+Customer_Loyalty_Prediction.py # Training + model saving script
+Procfile # Deployment process file (for Railway/Heroku)
+requirements.txt # Python dependencies
 ---
 
 ## 🧠 Model
