@@ -9,7 +9,8 @@ whether a customer will churn based on their demographic, account,
 and service-related data.'''
 
 import pandas as pd
-import numpy as np
+print(1)   
+
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -34,7 +35,7 @@ df.drop(columns=['customerID'], inplace=True)
 print(df.head())
 
 #Through graphs, analyse the data
-'''
+
 plt.figure(figsize=(5,7))
 sns.countplot(data=df , x='gender')
 plt.xlabel('Gender')
@@ -62,7 +63,7 @@ plt.show()
 plt.figure(figsize=(10, 6))
 sns.heatmap(df.corr(numeric_only=True), annot=True, cmap='coolwarm')
 plt.title('Correlation Heatmap')
-plt.show()'''
+plt.show()
 
 #Encode the data which is non numeric like gender , Payment methods, subscription status4
 
