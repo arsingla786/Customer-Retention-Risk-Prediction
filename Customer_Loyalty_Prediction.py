@@ -10,7 +10,7 @@ and service-related data.'''
 
 import pandas as pd
 print(1)   
-
+import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
