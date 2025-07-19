@@ -64,7 +64,7 @@ def predict():
                 result = "⚠️ Customer is more likely to cease the relationship with company"
                 recommendations = [
                     "Find out why customers are leaving by looking at their usage and complaints",
-                    "Have a support person personally talk to the customer",
+                    "Have a support person who will personally talk to the customer",
                     "Offer special discounts on plans or upgrades",
                     "Improve customer experience with better plans",
                     "Keep checking for signs that a customer might leave"

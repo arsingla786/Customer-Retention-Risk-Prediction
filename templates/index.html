@@ -331,15 +331,16 @@
         </div>
 
         <div class="form-section">
-            <form id="predictionForm">
+            <!-- Updated form with method and action -->
+            <form id="predictionForm" method="POST" action="/">
                 <div class="section-title">Customer Demographics</div>
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="gender">Gender:</label>
                         <select name="gender" id="gender" required>
                             <option value="">Select Gender</option>
-                            <option value="Female">Female</option>
-                            <option value="Male">Male</option>
+                            <option value="Female" {% if values and values.gender == 'Female' %}selected{% endif %}>Female</option>
+                            <option value="Male" {% if values and values.gender == 'Male' %}selected{% endif %}>Male</option>
                         </select>
                     </div>
 
@@ -347,8 +348,8 @@
                         <label for="SeniorCitizen">Senior Citizen:</label>
                         <select name="SeniorCitizen" id="SeniorCitizen" required>
                             <option value="">Select</option>
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
+                            <option value="0" {% if values and values.SeniorCitizen == '0' %}selected{% endif %}>No</option>
+                            <option value="1" {% if values and values.SeniorCitizen == '1' %}selected{% endif %}>Yes</option>
                         </select>
                     </div>
 
@@ -356,8 +357,8 @@
                         <label for="Partner">Marital Status:</label>
                         <select name="Partner" id="Partner" required>
                             <option value="">Select</option>
-                            <option value="No">Married</option>
-                            <option value="Yes">Unmarried</option>
+                            <option value="No" {% if values and values.Partner == 'No' %}selected{% endif %}>Married</option>
+                            <option value="Yes" {% if values and values.Partner == 'Yes' %}selected{% endif %}>Unmarried</option>
                         </select>
                     </div>
 
@@ -365,14 +366,14 @@
                         <label for="Dependents">Dependents:</label>
                         <select name="Dependents" id="Dependents" required>
                             <option value="">Select</option>
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
+                            <option value="No" {% if values and values.Dependents == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.Dependents == 'Yes' %}selected{% endif %}>Yes</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="tenure">Tenure (months):</label>
-                        <input type="number" name="tenure" id="tenure" class="numeric-input" required min="0" max="100" placeholder="e.g., 12">
+                        <input type="number" name="tenure" id="tenure" class="numeric-input" required min="0" max="100" placeholder="e.g., 12" value="{% if values %}{{ values.tenure }}{% endif %}">
                     </div>
                 </div>
 
@@ -382,8 +383,8 @@
                         <label for="PhoneService">Phone Service:</label>
                         <select name="PhoneService" id="PhoneService" required>
                             <option value="">Select</option>
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
+                            <option value="No" {% if values and values.PhoneService == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.PhoneService == 'Yes' %}selected{% endif %}>Yes</option>
                         </select>
                     </div>
 
@@ -391,9 +392,9 @@
                         <label for="MultipleLines">Multiple Phone Lines:</label>
                         <select name="MultipleLines" id="MultipleLines" required>
                             <option value="">Select</option>
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No phone service">No phone service</option>
+                            <option value="No" {% if values and values.MultipleLines == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.MultipleLines == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No phone service" {% if values and values.MultipleLines == 'No phone service' %}selected{% endif %}>No phone service</option>
                         </select>
                     </div>
 
@@ -401,9 +402,9 @@
                         <label for="InternetService">Internet Service:</label>
                         <select name="InternetService" id="InternetService" required>
                             <option value="">Select</option>
-                            <option value="DSL">DSL</option>
-                            <option value="Fiber optic">Fiber optic</option>
-                            <option value="No">No</option>
+                            <option value="DSL" {% if values and values.InternetService == 'DSL' %}selected{% endif %}>DSL</option>
+                            <option value="Fiber optic" {% if values and values.InternetService == 'Fiber optic' %}selected{% endif %}>Fiber optic</option>
+                            <option value="No" {% if values and values.InternetService == 'No' %}selected{% endif %}>No</option>
                         </select>
                     </div>
 
@@ -411,9 +412,9 @@
                         <label for="OnlineSecurity">Online Security:</label>
                         <select name="OnlineSecurity" id="OnlineSecurity" required>
                             <option value="">Select</option>
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No internet service">No internet service</option>
+                            <option value="No" {% if values and values.OnlineSecurity == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.OnlineSecurity == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No internet service" {% if values and values.OnlineSecurity == 'No internet service' %}selected{% endif %}>No internet service</option>
                         </select>
                     </div>
 
@@ -421,9 +422,9 @@
                         <label for="OnlineBackup">Online Backup:</label>
                         <select name="OnlineBackup" id="OnlineBackup" required>
                             <option value="">Select</option>
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No internet service">No internet service</option>
+                            <option value="No" {% if values and values.OnlineBackup == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.OnlineBackup == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No internet service" {% if values and values.OnlineBackup == 'No internet service' %}selected{% endif %}>No internet service</option>
                         </select>
                     </div>
 
@@ -431,9 +432,9 @@
                         <label for="DeviceProtection">Device Protection:</label>
                         <select name="DeviceProtection" id="DeviceProtection" required>
                             <option value="">Select</option>
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No internet service">No internet service</option>
+                            <option value="No" {% if values and values.DeviceProtection == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.DeviceProtection == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No internet service" {% if values and values.DeviceProtection == 'No internet service' %}selected{% endif %}>No internet service</option>
                         </select>
                     </div>
 
@@ -441,9 +442,9 @@
                         <label for="TechSupport">Tech Support:</label>
                         <select name="TechSupport" id="TechSupport" required>
                             <option value="">Select</option>
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No internet service">No internet service</option>
+                            <option value="No" {% if values and values.TechSupport == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.TechSupport == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No internet service" {% if values and values.TechSupport == 'No internet service' %}selected{% endif %}>No internet service</option>
                         </select>
                     </div>
 
@@ -451,9 +452,9 @@
                         <label for="StreamingTV">Streaming TV:</label>
                         <select name="StreamingTV" id="StreamingTV" required>
                             <option value="">Select</option>
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No internet service">No internet service</option>
+                            <option value="No" {% if values and values.StreamingTV == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.StreamingTV == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No internet service" {% if values and values.StreamingTV == 'No internet service' %}selected{% endif %}>No internet service</option>
                         </select>
                     </div>
 
@@ -461,9 +462,9 @@
                         <label for="StreamingMovies">Streaming Movies:</label>
                         <select name="StreamingMovies" id="StreamingMovies" required>
                             <option value="">Select</option>
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No internet service">No internet service</option>
+                            <option value="No" {% if values and values.StreamingMovies == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.StreamingMovies == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No internet service" {% if values and values.StreamingMovies == 'No internet service' %}selected{% endif %}>No internet service</option>
                         </select>
                     </div>
                 </div>
@@ -474,9 +475,9 @@
                         <label for="Contract">Contract:</label>
                         <select name="Contract" id="Contract" required>
                             <option value="">Select</option>
-                            <option value="Month-to-month">Month-to-month</option>
-                            <option value="One year">One year</option>
-                            <option value="Two year">Two year</option>
+                            <option value="Month-to-month" {% if values and values.Contract == 'Month-to-month' %}selected{% endif %}>Month-to-month</option>
+                            <option value="One year" {% if values and values.Contract == 'One year' %}selected{% endif %}>One year</option>
+                            <option value="Two year" {% if values and values.Contract == 'Two year' %}selected{% endif %}>Two year</option>
                         </select>
                     </div>
 
@@ -484,8 +485,8 @@
                         <label for="PaperlessBilling">Paperless Billing:</label>
                         <select name="PaperlessBilling" id="PaperlessBilling" required>
                             <option value="">Select</option>
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
+                            <option value="No" {% if values and values.PaperlessBilling == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if values and values.PaperlessBilling == 'Yes' %}selected{% endif %}>Yes</option>
                         </select>
                     </div>
 
@@ -493,33 +494,50 @@
                         <label for="PaymentMethod">Payment Method:</label>
                         <select name="PaymentMethod" id="PaymentMethod" required>
                             <option value="">Select</option>
-                            <option value="Electronic check">Electronic check</option>
-                            <option value="Mailed check">Mailed check</option>
-                            <option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
-                            <option value="Credit card (automatic)">Credit card (automatic)</option>
+                            <option value="Electronic check" {% if values and values.PaymentMethod == 'Electronic check' %}selected{% endif %}>Electronic check</option>
+                            <option value="Mailed check" {% if values and values.PaymentMethod == 'Mailed check' %}selected{% endif %}>Mailed check</option>
+                            <option value="Bank transfer (automatic)" {% if values and values.PaymentMethod == 'Bank transfer (automatic)' %}selected{% endif %}>Bank transfer (automatic)</option>
+                            <option value="Credit card (automatic)" {% if values and values.PaymentMethod == 'Credit card (automatic)' %}selected{% endif %}>Credit card (automatic)</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="MonthlyCharges">Monthly Charges[0-200]($):</label>
-                        <input type="number" name="MonthlyCharges" id="MonthlyCharges" class="numeric-input" required min="0" max="200" step="1.00" placeholder="e.g., 80.00">
+                        <input type="number" name="MonthlyCharges" id="MonthlyCharges" class="numeric-input" required min="0" max="200" step="1.00" placeholder="e.g., 80.00" value="{% if values %}{{ values.MonthlyCharges }}{% endif %}">
                     </div>
 
                     <div class="form-group">
                         <label for="TotalCharges">Total Charges[0-10000]($):</label>
-                        <input type="number" name="TotalCharges" id="TotalCharges" class="numeric-input" required min="0" max="10000" step="100.00" placeholder="e.g., 1500.00">
+                        <input type="number" name="TotalCharges" id="TotalCharges" class="numeric-input" required min="0" max="10000" step="100.00" placeholder="e.g., 1500.00" value="{% if values %}{{ values.TotalCharges }}{% endif %}">
                     </div>
                 </div>
 
-                <button type="submit" class="submit-btn">🎯 Predict Customer Loyalty</button>
+                <button type="submit" class="submit-btn"> Predict Customer Loyalty</button>
             </form>
 
-            <div class="loading" id="loadingDiv">
-                <div class="spinner"></div>
-                <p>Analyzing customer data...</p>
+            <!-- Display results from Flask backend -->
+            {% if error %}
+            <div class="error">
+                <strong>Error:</strong> {{ error }}
             </div>
+            {% endif %}
 
-            <div id="resultSection"></div>
+            {% if result %}
+            <div class="result-section {% if prediction == 1 %}result-negative{% else %}result-positive{% endif %}">
+                <h3>➡️ Prediction Result</h3>
+                <p><strong>{{ result }}</strong></p>
+                {% if recommendations %}
+                <div class="recommendations">
+                    <h4>📋 Recommendations:</h4>
+                    <ul>
+                        {% for rec in recommendations %}
+                        <li>{{ rec }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
         </div>
     </div>
 
@@ -562,77 +580,6 @@
     </div>
 
     <script>
-        // Form validation
-        const form = document.getElementById('predictionForm');
-        const loadingDiv = document.getElementById('loadingDiv');
-        const resultSection = document.getElementById('resultSection');
-
-        // Form submission
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validate form
-            const inputs = form.querySelectorAll('input[required], select[required]');
-            let isValid = true;
-            
-            inputs.forEach(input => {
-                if (input.value.trim() === '') {
-                    input.closest('.form-group').classList.add('error');
-                    isValid = false;
-                } else {
-                    input.closest('.form-group').classList.remove('error');
-                    input.closest('.form-group').classList.add('success');
-                }
-            });
-            
-            if (!isValid) {
-                alert('Please fill out all required fields.');
-                return;
-            }
-            
-            // Show loading
-            loadingDiv.style.display = 'block';
-            resultSection.innerHTML = '';
-            
-            // Simulate API call
-            setTimeout(() => {
-                loadingDiv.style.display = 'none';
-                showMockResult();
-            }, 2000);
-        });
-
-        // Mock result function (replace with actual API call)
-        function showMockResult() {
-            const mockPrediction = Math.random() > 0.5;
-            const resultClass = mockPrediction ? 'result-negative' : 'result-positive';
-            const resultText = mockPrediction ? 'Customer may cease relationship (High risk)' : 'Customer will likely continue relationship (Low risk)';
-            
-            const recommendations = mockPrediction ? [
-                'Offer loyalty rewards or discounts',
-                'Improve customer service experience',
-                'Consider upgrading to longer-term contract',
-                'Provide additional value-added services'
-            ] : [
-                'Maintain current service quality',
-                'Consider upselling additional services',
-                'Implement customer feedback surveys',
-                'Continue monitoring satisfaction levels'
-            ];
-            
-            resultSection.innerHTML = `
-                <div class="result-section ${resultClass}">
-                    <h3>🎯 Prediction Result</h3>
-                    <p><strong>${resultText}</strong></p>
-                    <div class="recommendations">
-                        <h4>📋 Recommendations:</h4>
-                        <ul>
-                            ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                        </ul>
-                    </div>
-                </div>
-            `;
-        }
-
         // Modal functions
         function openAboutModal() {
             document.getElementById('aboutModal').style.display = 'block';
@@ -647,20 +594,6 @@
             const modal = document.getElementById('aboutModal');
             if (event.target === modal) {
                 modal.style.display = 'none';
-            }
-        }
-
-        // Auto-calculate total charges when monthly charges and tenure change
-        document.getElementById('MonthlyCharges').addEventListener('input', autoCalculateTotal);
-        document.getElementById('tenure').addEventListener('input', autoCalculateTotal);
-
-        function autoCalculateTotal() {
-            const monthly = parseFloat(document.getElementById('MonthlyCharges').value) || 0;
-            const tenure = parseFloat(document.getElementById('tenure').value) || 0;
-            const totalField = document.getElementById('TotalCharges');
-            
-            if (monthly > 0 && tenure > 0 && totalField.value === '') {
-                totalField.value = (monthly * tenure).toFixed(2);
             }
         }
     </script>
