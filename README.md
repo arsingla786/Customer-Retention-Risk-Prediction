@@ -10,7 +10,7 @@ Deployed on **Railway**: [Visit Application](https://customer-loyalty-predictor.
 ---
 ## 📂 Project Structure
 
-```text
+
 model/
 ├── model.pkl                  # Trained ML model (Random Forest)
 ├── scaler.pkl                 # Feature scaler (StandardScaler)
