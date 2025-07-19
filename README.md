@@ -42,4 +42,4 @@ requirements.txt               # Python dependencies
 - Simple and clean UI built with Flask and HTML
 - Get suggestions based on the prediction
 
-###you tube Video url- https://youtu.be/6SHENmKWlIY
+### YouTube Video URL- https://youtu.be/6SHENmKWlIY
