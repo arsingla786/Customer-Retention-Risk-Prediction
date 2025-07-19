@@ -1,4 +1,4 @@
-# Customer Retention Risk Prediction
+# Customer Loyalty Prediction
 
 This project is a machine learning-powered web application that predicts whether a customer is likely to churn based on their behavioral and demographic attributes. The goal is to assist businesses in identifying high-risk customers and taking proactive steps to retain them.
 
@@ -27,8 +27,8 @@ Deployed on **Railway**: [Visit Application](https://customer-loyalty-predictor.
 
 ## 🧠 Model
 
-- **Algorithm Used:** Random Forest Classifier , Logistic regression
-- **Libraries:** scikit-learn, pandas, numpy, joblib
+- **Algorithms Used:** Random Forest Classifier , Logistic regression
+- **Libraries:** scikit-learn, pandas, numpy, joblib, matplotlib, seaborn
 - **Features:** Customer demographics, tenure, charges, service usage, etc.
 - **Target:** Predict whether a customer will **churn** or **stay loyal**
 
@@ -39,5 +39,5 @@ Deployed on **Railway**: [Visit Application](https://customer-loyalty-predictor.
 - Input customer data via a form
 - Predict customer loyalty instantly
 - Simple and clean UI built with Flask and HTML
-- Model, scaler, and encoders are loaded dynamically for prediction
+- Get suggestions based on the prediction
 
