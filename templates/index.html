@@ -33,6 +33,10 @@
             padding: 30px;
             text-align: center;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .about-btn {
@@ -63,6 +67,7 @@
         .header p {
             font-size: 1.1em;
             opacity: 0.9;
+            margin-left: 40px;
         }
 
         .form-section {
@@ -294,29 +299,6 @@
             border-color: #28a745;
         }
 
-        /* Progress bar */
-        .progress-container {
-            width: 100%;
-            background-color: #f0f0f0;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-
-        .progress-text {
-            text-align: center;
-            margin-bottom: 10px;
-            color: #666;
-            font-size: 14px;
-        }
-
         /* Responsive design */
         @media (max-width: 768px) {
             .form-grid {
@@ -348,12 +330,6 @@
         </div>
 
         <div class="form-section">
-            <div class="progress-text">Form Completion Progress</div>
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            <div id="progressText">0% Complete</div>
-
             <form id="predictionForm">
                 <div class="section-title">Customer Demographics</div>
                 <div class="form-grid">
@@ -376,11 +352,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="Partner">Partner:</label>
+                        <label for="Partner">Marital Status:</label>
                         <select name="Partner" id="Partner" required>
                             <option value="">Select</option>
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
+                            <option value="No">Married</option>
+                            <option value="Yes">Unmarried</option>
                         </select>
                     </div>
 
@@ -411,7 +387,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="MultipleLines">Multiple Lines:</label>
+                        <label for="MultipleLines">Multiple Phone Lines:</label>
                         <select name="MultipleLines" id="MultipleLines" required>
                             <option value="">Select</option>
                             <option value="No">No</option>
@@ -553,7 +529,7 @@
             <h2>🎯 About Customer Loyalty Prediction</h2>
             
             <h3>What is this tool?</h3>
-            <p>This is a machine learning-powered tool that predicts whether a customer will keep or cease their relationship with your company based on their demographic, service, and billing information.</p>
+            <p>This is a machine learning-powered tool that can be used by service providing companies. It predicts whether a customer will keep or cease their relationship with your company based on their demographics, services taken, and billing information.</p>
             
             <h3>How to use this tool:</h3>
             <ul>
@@ -585,38 +561,10 @@
     </div>
 
     <script>
-        // Form validation and progress tracking
+        // Form validation
         const form = document.getElementById('predictionForm');
-        const progressBar = document.getElementById('progressBar');
-        const progressText = document.getElementById('progressText');
         const loadingDiv = document.getElementById('loadingDiv');
         const resultSection = document.getElementById('resultSection');
-
-        // Calculate and update progress
-        function updateProgress() {
-            const inputs = form.querySelectorAll('input, select');
-            let filledInputs = 0;
-            
-            inputs.forEach(input => {
-                if (input.value.trim() !== '') {
-                    filledInputs++;
-                    input.closest('.form-group').classList.add('success');
-                    input.closest('.form-group').classList.remove('error');
-                } else {
-                    input.closest('.form-group').classList.remove('success');
-                }
-            });
-            
-            const progress = (filledInputs / inputs.length) * 100;
-            progressBar.style.width = progress + '%';
-            progressText.textContent = Math.round(progress) + '% Complete';
-        }
-
-        // Add event listeners to all form inputs
-        form.querySelectorAll('input, select').forEach(input => {
-            input.addEventListener('input', updateProgress);
-            input.addEventListener('change', updateProgress);
-        });
 
         // Form submission
         form.addEventListener('submit', function(e) {
@@ -632,6 +580,7 @@
                     isValid = false;
                 } else {
                     input.closest('.form-group').classList.remove('error');
+                    input.closest('.form-group').classList.add('success');
                 }
             });
             
@@ -713,9 +662,6 @@
                 totalField.value = (monthly * tenure).toFixed(2);
             }
         }
-
-        // Initialize progress on page load
-        updateProgress();
     </script>
 </body>
 </html>
