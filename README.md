@@ -40,3 +40,9 @@ requirements.txt               # Python dependencies
 - Predict customer loyalty instantly
 - Simple and clean UI built with Flask and HTML
 - Get suggestions based on the prediction
+
+<br><br>
+___
+<br><br>
+
+<img width="746" height="500" alt="Screenshot 2025-07-19 141223" src="https://github.com/user-attachments/assets/b3831052-cbc4-4052-8795-3cfe81c57e53" />
