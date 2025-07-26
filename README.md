@@ -1,5 +1,5 @@
 # Customer Loyalty Prediction 
-
+ 
 This project is a machine learning-powered web application that predicts whether a customer is likely to churn based on their behavioral and demographic attributes. The goal is to assist businesses in identifying high-risk customers and taking proactive steps to retain them.
 
 ## 🚀 Web Application
