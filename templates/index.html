@@ -325,8 +325,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <button class="about-btn" onclick="openAboutModal()">ℹ️ About</button>
-            <h1>🎯 Customer Loyalty Prediction</h1>
+            <button class="about-btn" onclick="openAboutModal()">About</button>
+            <h1>Customer Loyalty Prediction</h1>
             <p>Predict whether a customer will keep or cease the relationship with the company</p>
         </div>
 
@@ -524,11 +524,11 @@
 
             {% if result %}
             <div class="result-section {% if prediction == 1 %}result-negative{% else %}result-positive{% endif %}">
-                <h3>➡️ Prediction Result</h3>
+                <h3>Prediction Result</h3>
                 <p><strong>{{ result }}</strong></p>
                 {% if recommendations %}
                 <div class="recommendations">
-                    <h4>📋 Recommendations:</h4>
+                    <h4>Recommendations:</h4>
                     <ul>
                         {% for rec in recommendations %}
                         <li>{{ rec }}</li>
@@ -545,7 +545,7 @@
     <div id="aboutModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeAboutModal()">&times;</span>
-            <h2>🎯 About Customer Loyalty Prediction</h2>
+            <h2>About Customer Loyalty Prediction</h2>
             
             <h3>What is this tool?</h3>
             <p>This is a machine learning-powered tool that can be used by service providing companies. It predicts whether a customer will keep or cease their relationship with your company based on their demographics, services taken, and billing information.</p>
