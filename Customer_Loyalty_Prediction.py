@@ -194,62 +194,6 @@ prediction=1
 print("\nChurn Prediction:")
 print("Customer is more likely to cease the relationship with company" if prediction == 1 else "Customer seems to be loyal")
 
-if prediction==1:
-    print('''Here are some precautions to take: 
- 1. Identify Churn Drivers
-Analyze the customer's usage patterns, complaints, or drop in engagement.
-
-Check for:
-
-Frequent service issues
-
-High monthly charges
-
-Low tenure or recent plan downgrade
-
-2. Engage with the Customer
-Assign a customer success representative to personally reach out.
-
-Use surveys or calls to understand dissatisfaction.
-
-Acknowledge their concerns — prevention starts with communication.
-
- 3. Offer Personalized Incentives
-Discounts, cashback, or loyalty points
-
-Free upgrades (e.g., faster internet, premium features)
-
-Limited-time offers tailored to their usage
-
- 4. Improve Their Experience
-Suggest better or more relevant plans based on their needs
-
-Offer faster support or assign a dedicated service manager
-
-Remove or simplify hidden charges or billing confusion
-
-5. Monitor Churn Signals Continuously
-Automate churn alerts for high-risk customers (via your model)
-
-Track:
-
-Service usage decline
-
-Increasing complaints
-
-Payment delays
-
- 6. Build Customer Trust
-Send regular updates about new features or policies
-
-Be transparent in pricing, downtime, and service updates
-
-Ensure customer data privacy and respectful communication'''
-
-    )
-
-else:
-    print('Keep tracking the customer behaviour!')
 
 import os
 import joblib
