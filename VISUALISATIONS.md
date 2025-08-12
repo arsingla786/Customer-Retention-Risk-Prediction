@@ -1,4 +1,4 @@
-# 📊 Figures and Graphs
+# Figures and Graphs
 
 <img width="600" height="500" alt="Screenshot 2025-07-19 141146" src="https://github.com/user-attachments/assets/7177fe67-1fd9-4d49-87fe-cb0be4bc680a" />
 
