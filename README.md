@@ -2,30 +2,13 @@
  
 This project is a machine learning-powered web application that predicts whether a customer is likely to churn based on their behavioral and demographic attributes. The goal is to assist businesses in identifying high-risk customers and taking proactive steps to retain them.
 
-## 🚀 Web Application
+##  Web Application
 [Visit Application](https://customer-loyalty-prediction.up.railway.app/)  
 
 
 ---
-## 📂 Project Structure
 
-```
-
-model/
-├── model.pkl                  # Trained ML model (Random Forest)
-├── scaler.pkl                 # Feature scaler (StandardScaler)
-├── label_encoders.pkl         # Label encoders for categorical features
-templates/
-├── index.html                 # Frontend template for input form
-app.py                         # Flask web app
-Customer_data.csv              # Dataset used for training
-Customer_Loyalty_Prediction.py # Training + model saving script
-Procfile                       # Deployment process file (for Railway/Heroku)
-requirements.txt               # Python dependencies
-```
----
-
-## 🧠 Model
+## About ML Model
 
 - **Algorithms Used:** Random Forest Classifier , Logistic regression
 - **Libraries:** scikit-learn, pandas, numpy, joblib, matplotlib, seaborn
@@ -34,11 +17,11 @@ requirements.txt               # Python dependencies
 
 ---
 
-## 🖥️ Web App Features
+## Web App 
 
 - Input customer data via a form
 - Predict customer loyalty instantly
-- Simple and clean UI built with Flask and HTML
+- Built with Flask and HTML
 - Get suggestions based on the prediction
 
 <br><br>
